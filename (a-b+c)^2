@@ -1,0 +1,30 @@
+2) (a-b+c)^2
+
+import tensorflow as tf
+
+
+with tf.name_scope("9_minus_8_plus_3_squared"):
+    
+    a = tf.constant(9)
+    b = tf.constant(8)
+    c = tf.constant(3)
+    d = tf.square(a, name="a_2")
+    e = tf.square(b, name="b_2")
+    f = tf.square(c, name="c_2")
+    g = tf.multiply(a,b, name="ab")
+    h = tf.multiply(g,2, name="2ab")
+    i = tf.multiply(b,c, name="bc")
+    j = tf.multiply(i,2, name="2bc")
+    k = tf.multiply(c,a, name="ca")
+    l = tf.multiply(k,2, name="2ca")
+    
+    m = tf.add(d,e, name="a_2_plus_b_2")
+    n = tf.add(m,f, name="a_2_plus_b_2_plus_c_2")
+    o = tf.substract(n,h, name="a_2_plus_b_2_plus_c_2_minus_2ab")
+    p = tf.substract(o,j, name="a_2_plus_b_2_plus_c_2_minus_2ab_minus_2bc")
+    q = tf.add(p,l, name="a_2_plus_b_2_plus_c_2_minus_2ab_minus_2bc_plus_2ca")
+    
+with tf.Session() as sess:
+    writer = tf.summary.FileWriter("/tmp/tboard/output209_c1", sess.graph)
+    print(sess.run(q))
+    writer.close()
